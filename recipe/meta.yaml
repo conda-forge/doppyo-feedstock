@@ -5,20 +5,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/d/doppyo/doppyo-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/d/doppyo/doppyo-{{ version }}.tar.gz
   sha256: 902f0825274aded70e837d51e1b47f09f6cefc0b0b4e6893680a3e7200c746a0
 
 build:
-  number: 1
+  number: 2
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
   host:
-    - python >=3
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3
+    - python >={{ python_min }}
     - bokeh >=0.12.13
     - bottleneck >=1.2.1
     - cartopy >=0.16.0
@@ -34,6 +34,8 @@ requirements:
     - xarray >=0.10.7
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - doppyo
 
